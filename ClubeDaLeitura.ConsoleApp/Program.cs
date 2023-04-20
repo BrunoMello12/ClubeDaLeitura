@@ -25,11 +25,6 @@ namespace ClubeDaLeitura.ConsoleApp
             TelaRevista telaRevista = new TelaRevista();
             TelaEmprestimo telaEmprestimo = new TelaEmprestimo();
 
-            repositorioCaixa.Caixas = new ArrayList();
-            repositorioAmigo.listaAmigo = new ArrayList();
-            repositorioEmprestimo.listaEmprestimo = new ArrayList();
-            repositorioRevista.listaRevista = new ArrayList();
-
             Menus menus = new Menus();
 
             menus.revista = telaRevista;

@@ -1,10 +1,11 @@
-﻿using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 using System.Collections;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 {
-    public class TelaEmprestimo
+    public class TelaEmprestimo : Tela
     {
         public TelaAmigo telaAmigo;
         public TelaRevista telarevista;
@@ -22,7 +23,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             Console.WriteLine("----------------------REVISTAS-----------------------");
             telarevista.VisualizarRevistas();
             Console.WriteLine("-----------------------------------------------------");
-            if (repositorioAmigo.listaAmigo.Count == 0 || repositorioRevista.listaRevista.Count == 0)
+            if (repositorioAmigo.listaRegistro.Count == 0 || repositorioRevista.listaRegistro.Count == 0)
                 return;
 
             Console.WriteLine("Informe o id do amigo que pegou a revista: ");
@@ -58,7 +59,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
         public void VisualizarEmprestimo()
         {
-            if (repositorioEmprestimo.listaEmprestimo.Count == 0)
+            if (repositorioEmprestimo.listaRegistro.Count == 0)
             {
                 ApresentarMensagem("Não tem emprestimos adicionados", ConsoleColor.DarkYellow);
             }
@@ -67,7 +68,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("{0,-10} | {1,-20} | {2,-10} | {3,-20} | {4,-20} | {5,-10}", "ID", "Nome do Amigo", "Revista",
                     "Data de abertura", "Data de devolução", "Status");
-                foreach (Emprestimo emprestimo in repositorioEmprestimo.listaEmprestimo)
+                foreach (Emprestimo emprestimo in repositorioEmprestimo.listaRegistro)
                 {
                     Console.WriteLine("{0,-10} | {1,-20} | {2,-10} | {3,-20} | {4,-20} | {5,-10}", emprestimo.id, emprestimo.amigo.Nome, emprestimo.revista.tipoColecao,
                         emprestimo.dataEmprestimo, emprestimo.dataDevolucao, emprestimo.status);
@@ -79,7 +80,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
         public void AlterarStatus()
         {
             VisualizarEmprestimo();
-            if (repositorioEmprestimo.listaEmprestimo.Count == 0)
+            if (repositorioEmprestimo.listaRegistro.Count == 0)
                 return;
             Console.WriteLine();
             Console.WriteLine("Informe o id do emprestimo que deseja alterar o status: ");
@@ -90,13 +91,5 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             ApresentarMensagem("Status alterado com sucesso!", ConsoleColor.Green);
         }
 
-        private void ApresentarMensagem(string mensagem, ConsoleColor cor)
-        {
-            Console.WriteLine();
-            Console.ForegroundColor = cor;
-            Console.WriteLine(mensagem);
-            Console.ResetColor();
-            Console.ReadLine();
-        }
     }
 }

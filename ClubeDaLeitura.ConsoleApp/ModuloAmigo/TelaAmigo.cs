@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
+using System.Collections;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
-    public class TelaAmigo
+    public class TelaAmigo : Tela
     {
         public RepositorioAmigo repositorioAmigo;
 
@@ -18,16 +19,16 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             amigo.Telefone = Console.ReadLine();
             Console.WriteLine("Informe o endereço: ");
             amigo.Endereco = Console.ReadLine();
-            amigo.id = repositorioAmigo.idAmigo;
+            amigo.id = repositorioAmigo.ContadorId;
 
             repositorioAmigo.AdicionarAmigo(amigo);
             ApresentarMensagem("Amigo adicionado com sucesso!", ConsoleColor.Green);
-            repositorioAmigo.IncrementarAmigo();
+            repositorioAmigo.IncrementarId();
         }
 
         public void VisualizarAmigos()
         {
-            if (repositorioAmigo.listaAmigo.Count == 0)
+            if (repositorioAmigo.listaRegistro.Count == 0)
             {
                 ApresentarMensagem("Não tem amigos adicionados", ConsoleColor.DarkYellow);
             }
@@ -36,7 +37,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("{0,-10} | {1,-20} | {2,-30} | {3,-20} | {4,-30}", "ID", "Nome do Amigo", "Nome do Responsável",
                     "Telefone", "Endereço");
-                foreach (Amigo amigo in repositorioAmigo.listaAmigo)
+                foreach (Amigo amigo in repositorioAmigo.listaRegistro)
                 {
                     Console.WriteLine("{0,-10} | {1,-20} | {2,-30} | {3,-20} | {4,-30}", amigo.id, amigo.Nome, amigo.nomeResponsavel,
                         amigo.Telefone, amigo.Endereco);
@@ -48,7 +49,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
         public void EditarAmigo()
         {
             VisualizarAmigos();
-            if (repositorioAmigo.listaAmigo.Count == 0)
+            if (repositorioAmigo.listaRegistro.Count == 0)
                 return;
             Console.WriteLine("Informe o id do amigo que deseja editar: ");
             int idSelecionado = int.Parse(Console.ReadLine());
@@ -74,7 +75,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
         public void ExcluirAmigo()
         {
             VisualizarAmigos();
-            if (repositorioAmigo.listaAmigo.Count == 0)
+            if (repositorioAmigo.listaRegistro.Count == 0)
                 return;
 
             Console.WriteLine("Informe o id do amigo que deseja excluir: ");
@@ -87,15 +88,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
                 repositorioAmigo.ExcluirAmigo(amigo);
                 ApresentarMensagem("Amigo excluido com sucesso!", ConsoleColor.Green);
             }
-        }
-
-        private void ApresentarMensagem(string mensagem, ConsoleColor cor)
-        {
-            Console.WriteLine();
-            Console.ForegroundColor = cor;
-            Console.WriteLine(mensagem);
-            Console.ResetColor();
-            Console.ReadLine();
         }
 
     }

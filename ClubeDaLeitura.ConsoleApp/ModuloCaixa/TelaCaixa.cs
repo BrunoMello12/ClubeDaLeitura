@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
+using System.Collections;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 {
-    public class TelaCaixa
+    public class TelaCaixa : Tela
     {
         public RepositorioCaixa repositorioCaixa;
 
@@ -24,7 +25,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
         public void VisualizarCaixas()
         {
-            if (repositorioCaixa.Caixas.Count == 0)
+            if (repositorioCaixa.listaRegistro.Count == 0)
             {
                 ApresentarMensagem("Não tem caixas adicionadas", ConsoleColor.DarkYellow);
                 return;
@@ -33,7 +34,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("{0,-20} | {1,-20} | {2,-20}", "ID", "Cor", "Etiqueta");
-                foreach (Caixa caixa in repositorioCaixa.Caixas)
+                foreach (Caixa caixa in repositorioCaixa.listaRegistro)
                 {
                     Console.WriteLine("{0,-20} | {1,-20} | {2,-20}", caixa.id, caixa.Cor, caixa.Etiqueta);
 
@@ -46,7 +47,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
         {
             VisualizarCaixas();
 
-            if (repositorioCaixa.Caixas.Count == 0)
+            if (repositorioCaixa.listaRegistro.Count == 0)
                 return;
 
             Console.WriteLine("Informe o id da caixa que deseja editar: ");
@@ -68,7 +69,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
         {
             VisualizarCaixas();
 
-            if (repositorioCaixa.Caixas.Count == 0)
+            if (repositorioCaixa.listaRegistro.Count == 0)
                 return;
 
             Console.WriteLine("Informe o id do equipamento que deseja excluir: ");
@@ -81,15 +82,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
                 repositorioCaixa.ExcluirCaixa(caixa);
                 ApresentarMensagem("Caixa removida com sucesso!", ConsoleColor.Green);
             }
-        }
-
-        private void ApresentarMensagem(string mensagem, ConsoleColor cor)
-        {
-            Console.WriteLine();
-            Console.ForegroundColor = cor;
-            Console.WriteLine(mensagem);
-            Console.ResetColor();
-            Console.ReadLine();
         }
 
     }

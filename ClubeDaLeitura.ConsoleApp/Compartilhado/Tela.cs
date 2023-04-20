@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.Compartilhado
 {
-    internal class Tela
+    public class Tela
     {
-
+        public void ApresentarMensagem(string mensagem, ConsoleColor cor)
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = cor;
+            Console.WriteLine(mensagem);
+            Console.ResetColor();
+            Console.ReadLine();
+        }
     }
 }

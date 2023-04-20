@@ -1,9 +1,10 @@
-﻿namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
+
+namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 {
-    public class Caixa
+    public class Caixa : Entidade
     {
         public string Cor;
         public string Etiqueta;
-        public int id;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,26 +8,25 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 {
-    public class RepositorioRevista
+    public class RepositorioRevista : Repositorio
     {
         public int idRevista = 1;
-        public ArrayList listaRevista;
 
         public void AdicionarRevista(Revista revista)
         {
-            listaRevista.Add(revista);
+            listaRegistro.Add(revista);
         }
 
         public void ExcluirRevista(Revista revista)
         {
-            listaRevista.Remove(revista);
+            listaRegistro.Remove(revista);
         }
 
         public Revista PegarRevistaPorId(int id)
         {
             Revista revista = null;
 
-            foreach (Revista r in listaRevista)
+            foreach (Revista r in listaRegistro)
             {
                 if (r.id == id)
                 {

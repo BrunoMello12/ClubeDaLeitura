@@ -1,9 +1,10 @@
-﻿using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 using System.Collections;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 {
-    public class TelaRevista
+    public class TelaRevista : Tela
     {
         public TelaCaixa telacaixa;
         public RepositorioCaixa repositorioCaixa;
@@ -11,7 +12,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 
         public void AdicionarRevistaNaCaixa()
         {
-            if (repositorioCaixa.Caixas.Count == 0)
+            if (repositorioCaixa.listaRegistro.Count == 0)
             {
                 ApresentarMensagem("Não tem Caixas adicionadas", ConsoleColor.DarkYellow);
                 return;
@@ -49,7 +50,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 
         public void VisualizarRevistas()
         {
-            if (repositorioRevista.listaRevista.Count == 0)
+            if (repositorioRevista.listaRegistro.Count == 0)
             {
                 ApresentarMensagem("Não tem Revistas adicionadas", ConsoleColor.DarkYellow);
                 return;
@@ -59,7 +60,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("{0,-10} | {1,-20} | {2,-20} | {3,-20} | {4,-20}", "ID", "Tipo Coleção", "Número da Edição",
                     "Ano da Revista", "Etiqueta");
-                foreach (Revista revista in repositorioRevista.listaRevista)
+                foreach (Revista revista in repositorioRevista.listaRegistro)
                 {
                     Console.WriteLine("{0,-10} | {1,-20} | {2,-20} | {3,-20} | {4,-20}", revista.id, revista.tipoColecao,
                         revista.numEdicao, revista.anoRevista, revista.caixa.Etiqueta);
@@ -70,16 +71,15 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 
         public void EditarRevista()
         {
-            TelaCaixa caixa = new TelaCaixa();
             Console.WriteLine("----------------------------------REVISTAS--------------------------------------");
             VisualizarRevistas();
             Console.WriteLine("--------------------------------------------------------------------------------");
             Console.WriteLine();
             Console.WriteLine("-------------------CAIXAS-----------------------------------");
-            caixa.VisualizarCaixas();
+            telacaixa.VisualizarCaixas();
             Console.WriteLine("------------------------------------------------------------");
 
-            if (repositorioCaixa.Caixas.Count == 0 || repositorioRevista.listaRevista.Count == 0)
+            if (repositorioCaixa.listaRegistro.Count == 0 || repositorioRevista.listaRegistro.Count == 0)
                 return;
 
             Console.WriteLine("Informe o id da revista que deseja editar: ");
@@ -110,7 +110,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
         public void ExcluirRevista()
         {
             VisualizarRevistas();
-            if (repositorioRevista.listaRevista.Count == 0)
+            if (repositorioRevista.listaRegistro.Count == 0)
                 return;
 
             Console.WriteLine();
@@ -128,15 +128,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
                 ApresentarMensagem("Revista removida com sucesso!", ConsoleColor.Green);
             }
 
-        }
-
-        private void ApresentarMensagem(string mensagem, ConsoleColor cor)
-        {
-            Console.WriteLine();
-            Console.ForegroundColor = cor;
-            Console.WriteLine(mensagem);
-            Console.ResetColor();
-            Console.ReadLine();
         }
 
     }

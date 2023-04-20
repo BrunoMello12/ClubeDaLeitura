@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,21 +8,20 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 {
-    public class RepositorioEmprestimo
+    public class RepositorioEmprestimo : Repositorio
     {
-        public ArrayList listaEmprestimo;
         public int idEmprestimo = 1;
 
         public void AdicionarEmprestimo(Emprestimo emprestimo)
         {
-            listaEmprestimo.Add(emprestimo);
+            listaRegistro.Add(emprestimo);
         }
 
         public Emprestimo PegarEmprestimoPorId(int id)
         {
             Emprestimo emprestimo = null;
 
-            foreach (Emprestimo e in listaEmprestimo)
+            foreach (Emprestimo e in listaRegistro)
             {
                 if (e.id == id)
                 {

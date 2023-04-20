@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.Compartilhado
 {
-    internal class Entidade
+    public class Entidade
     {
-
+        public int id;
     }
 }

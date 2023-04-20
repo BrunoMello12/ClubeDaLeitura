@@ -1,10 +1,10 @@
-﻿using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 {
-    public class Revista
+    public class Revista : Entidade
     {
-        public int id;
         public string tipoColecao;
         public string numEdicao;
         public string anoRevista;

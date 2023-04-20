@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,21 +8,18 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
-    public class RepositorioAmigo
+    public class RepositorioAmigo : Repositorio
     {
-        public int idAmigo = 1;
-        public ArrayList listaAmigo;
-
         public void AdicionarAmigo(Amigo amigo)
         {
-            listaAmigo.Add(amigo);
+            listaRegistro.Add(amigo);
         }
 
         public Amigo PegarAmigoPorId(int id)
         {
             Amigo amigo = null;
 
-            foreach (Amigo a in listaAmigo)
+            foreach (Amigo a in listaRegistro)
             {
                 if (a.id == id)
                 {
@@ -34,12 +32,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 
         public void ExcluirAmigo(Amigo amigo)
         {
-            listaAmigo.Remove(amigo);
+            listaRegistro.Remove(amigo);
         }
 
-        public void IncrementarAmigo()
-        {
-            idAmigo++;
-        }
     }
 }
